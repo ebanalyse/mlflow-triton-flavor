@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mlflow-triton-flavor"
+name = "mlflow_triton_flavor"
 version = "0.1.0"
 description = ""
 authors = ["Julian <julian.neeleman@eb.dk>"]
