@@ -4,7 +4,7 @@ import sys
 
 from mlflow.exceptions import MlflowException
 from mlflow.models import Model
-from mlflow.models.model import MLMODEL_FILE_NAME
+from mlflow.models.model import MLMODEL_FILE_NAME, ModelInfo
 from mlflow.protos.databricks_pb2 import RESOURCE_ALREADY_EXISTS
 from mlflow.tracking._model_registry import DEFAULT_AWAIT_MAX_SLEEP_SECONDS
 
@@ -44,7 +44,7 @@ def log_model(
     artifact_path,
     registered_model_name=None,
     await_registration_for=DEFAULT_AWAIT_MAX_SLEEP_SECONDS,
-):
+) -> ModelInfo:
     """
     Log a Triton model as an MLflow artifact for the current run.
 
@@ -59,7 +59,7 @@ def log_model(
                             waits for five minutes. Specify 0 or None to skip waiting.
 
     """
-    Model.log(
+    return Model.log(
         artifact_path=artifact_path,
         flavor=sys.modules[__name__],
         triton_model_path=triton_model_path,
