@@ -11,7 +11,7 @@ from mlflow.tracking._model_registry import DEFAULT_AWAIT_MAX_SLEEP_SECONDS
 FLAVOR_NAME = "triton"
 
 
-def save_model(triton_model_path, path, mlflow_model=None):
+def save_model(triton_model_path, path, mlflow_model=Model()):
     """
     Save a Triton model to a path on the local file system.
 
