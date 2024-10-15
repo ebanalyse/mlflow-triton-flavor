@@ -10,17 +10,17 @@ from mlflow.protos.databricks_pb2 import RESOURCE_ALREADY_EXISTS
 FLAVOR_NAME = "triton"
 
 
-def save_model(source_path: str, dest_path: str, mlflow_model=Model()):
+def save_model(source_path: str, path: str, mlflow_model=Model()):
     """
     Save a Triton model to a path on the local file system.
 
     :param source_path: Path to Triton model folder.
-    :param dest_path: Path to where the model should be saved.
+    :param path: Path to where the model should be saved.
     :param mlflow_model: :py:mod:`mlflow.models.Model` this flavor is being added to.
 
     """
 
-    dest_path = os.path.abspath(dest_path)
+    dest_path = os.path.abspath(path)
     if os.path.exists(dest_path):
         raise MlflowException(
             message="Path '{}' already exists".format(dest_path),
@@ -52,6 +52,6 @@ def log_model(path: str, register_model: bool = True) -> ModelInfo:
     return Model.log(
         artifact_path=model_name,
         flavor=sys.modules[__name__],
-        triton_model_path=path,
+        source_path=path,
         registered_model_name=model_name if register_model else None,
     )
