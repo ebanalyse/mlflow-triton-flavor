@@ -28,13 +28,9 @@ def save_model(source_path: str, path: str, mlflow_model=Model()):
         )
     os.makedirs(dest_path)
 
-    source_path = os.path.normpath(source_path)
-    model_data_subpath = os.path.basename(source_path)
-    model_data_path = os.path.join(dest_path, model_data_subpath)
+    shutil.copytree(os.path.normpath(source_path), dest_path)
 
-    shutil.copytree(source_path, model_data_path)
-
-    mlflow_model.add_flavor(FLAVOR_NAME, data=model_data_subpath)
+    mlflow_model.add_flavor(FLAVOR_NAME)
     mlflow_model.save(os.path.join(dest_path, MLMODEL_FILE_NAME))
 
 
