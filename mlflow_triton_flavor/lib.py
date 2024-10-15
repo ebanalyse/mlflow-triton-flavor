@@ -26,7 +26,6 @@ def save_model(source_path: str, path: str, mlflow_model=Model()):
             message="Path '{}' already exists".format(dest_path),
             error_code=RESOURCE_ALREADY_EXISTS,
         )
-    os.makedirs(dest_path)
 
     shutil.copytree(os.path.normpath(source_path), dest_path)
 
